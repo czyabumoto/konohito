@@ -2,6 +2,7 @@ package jp.co.cyberz.konohito.model;
 
 import java.util.Calendar;
 import java.util.LinkedList;
+import java.util.StringTokenizer;
 
 import jp.co.cyberz.konohito.KonohitoDB;
 
@@ -39,6 +40,58 @@ public class Friend {
 	
 	public static Friend get(String id) {
 		return KonohitoDB.getFriend(id);
+	}
+	
+	/**
+	 * タグを追加する。
+	 * @param tag
+	 */
+	public LinkedList<String> addTag(String tag) {
+		if (tags == null) tags = new LinkedList<String>();
+		for (String t : tags) {
+			if(t.equals(tag)) {
+				return tags;
+			}
+		}
+		tags.add(tag);
+		return tags;
+	}
+	
+	/**
+	 * カンマ区切り形式で複数のタグを追加する。
+	 * @param tags
+	 * @return
+	 */
+	public LinkedList<String> addTags(String csv) {
+		if(csv == null) return tags;
+		StringTokenizer st = new StringTokenizer(csv, ",");
+		while(st.hasMoreTokens()) {
+			String tag = st.nextToken();
+			addTag(tag);
+		}
+		return tags;
+	}
+	
+	/**
+	 * タグを削除する。
+	 * @param tag
+	 */
+	public LinkedList<String> removeTab(String tag) {
+		if (tags == null) tags = new LinkedList<String>();
+		tags.remove(tag);
+		return tags;
+	}
+	
+	/**
+	 * CSV形式のタグリストを返す。
+	 * @return
+	 */
+	public String getTagsCsv() {
+		StringBuffer buf = new StringBuffer();
+		for (String tag : tags) {
+			buf.append(tag  + ",");
+		}
+		return buf.toString();
 	}
 	
 }

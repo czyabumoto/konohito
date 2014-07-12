@@ -10,8 +10,11 @@ public class KonohitoDB {
 	private static SQLiteDatabase db = null;
 	
 	private static final String TABLE_NAME_FRIENDS = "friend";
-	private static final String[] COLUMNS_FRIENDS = {"_id", "name"};
-	
+	private static final String[] COLUMNS_FRIENDS = {
+		"_id",
+		"name",
+		"tags"};
+
 	public static void init(Context c) {
 		if (db == null) {
 			KonohitoSQLite sqlite = new KonohitoSQLite(c);
@@ -27,11 +30,12 @@ public class KonohitoDB {
 			while (next) {
 				friend.id   = cursor.getString(0);	
 				friend.name = cursor.getString(1);
+				friend.addTags(cursor.getString(2));
 				next = cursor.moveToNext();
 			}
 			cursor.close();
 		} catch (Exception e) {
-			
+			System.out.println(e.toString());
 		}
 		return friend;
 	}
@@ -41,6 +45,7 @@ public class KonohitoDB {
 			ContentValues values = new ContentValues();
 			values.put("_id" , friend.id);
 			values.put("name", friend.name);
+			values.put("tags", friend.getTagsCsv());
 			long result = db.insert(TABLE_NAME_FRIENDS, null, values);
 			if(result < 0) {
 				result = db.update(TABLE_NAME_FRIENDS, values, "_id=?", new String[] {friend.id});
