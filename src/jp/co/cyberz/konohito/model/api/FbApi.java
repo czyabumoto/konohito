@@ -28,7 +28,7 @@ public final class FbApi {
 		this.facebook = FacebookFactory.getSingleton();
 		this.facebook.setOAuthAppId("325326170957493", "6e913651e863728127bfed697ea80c1c");
 		facebook.setOAuthPermissions("email,publish_stream,public_profile,user_friends,user_status");
-		facebook.setOAuthAccessToken(new AccessToken("CAACEdEose0cBAPyIZCuZAkDZAnSTpBSuBE1VaFmG1NGuvCL1OOkkt42WAd7WaDiMdyIsaizI1iwb9aHeYnaDTq6OmgOc6onELoNvdHW0JT0w0jmuqG9R7tGNNLq5vaxgWJG5IY06TQFSkOpgKwemzjDcIzqfJ2mYTmnpYsz9D8X1OUDllUk232IZB5kHS2DW3fLfYJ4MYQZDZD", null));
+		facebook.setOAuthAccessToken(new AccessToken("CAACEdEose0cBAMAwHWmZAaYw9ApbMifjaRo4GbnnKy9Mi8n0bNeIv6n1H6AG2glAdt5uqyo5ZAFqNlXpBqD76epN7xVXwZA7FPqvZCR1R2XaWIpt68ADVXOhdlhEWAN8ozMyZBcOr9A3KIImb8VRIMS2JfcpiKBAxztp8Qc5ZCNCyAEsFCQNUA27MnR3XMrZB2ziX4rOvCPNAZDZD", null));
 	}
 
 	/**

@@ -12,6 +12,8 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
+		KonohitoDB.init(getApplicationContext());
+		
 		// TODO: Facebook認証していなければFacebook認証画面へ
 		
 		FriendController.getFriends();

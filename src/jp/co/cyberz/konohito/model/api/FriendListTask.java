@@ -25,6 +25,8 @@ public class FriendListTask extends AsyncTask<String, Integer, List<Friend>>{
 		try {
 			ResponseList<facebook4j.Friend> friends = this.facebook.getFriends();
 			List<Friend> fList = new ArrayList<Friend>();
+// XXX:for debug
+int i = 0;
 			for (facebook4j.Friend friend : friends) {
 				String id = friend.getId();
 				User u = this.facebook.getUser(id);
@@ -41,6 +43,10 @@ public class FriendListTask extends AsyncTask<String, Integer, List<Friend>>{
 				f.middle_name = u.getMiddleName();
 				// f.tags
 				fList.add(f);
+// XXX:for debug
+if (i++ > 2) {
+	break;
+}
 			}
 			return fList;
 		} catch (Exception ex) {

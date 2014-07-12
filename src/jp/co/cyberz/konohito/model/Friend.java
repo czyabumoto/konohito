@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.StringTokenizer;
 
 import jp.co.cyberz.konohito.KonohitoDB;
+import jp.co.cyberz.util.CalendarUtil;
 
 import facebook4j.User;
 
@@ -31,8 +32,11 @@ public class Friend {
 	public String memo;
 	
 	/** Facebookフレンド追加日時 */
-	public Calendar add_date;
+	public String add_datetime;
 	
+	public Friend() {
+		add_datetime = CalendarUtil.todayDatetimeString();
+	}
 	
 	public void save() {
 		KonohitoDB.save(this);
@@ -87,6 +91,7 @@ public class Friend {
 	 * @return
 	 */
 	public String getTagsCsv() {
+		if (tags == null) return "";
 		StringBuffer buf = new StringBuffer();
 		for (String tag : tags) {
 			buf.append(tag  + ",");

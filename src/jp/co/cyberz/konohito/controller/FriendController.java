@@ -8,7 +8,8 @@ import jp.co.cyberz.konohito.model.api.FriendListCallback;
 
 public class FriendController {
 	
-	public static void getFriends(/*コールバックリスナー*/) {
+	public static void getFriends() {
+		
 		// SQLiteからフレンド取得
 		LinkedList<Friend> friends = load();
 		
@@ -18,6 +19,9 @@ public class FriendController {
 		FbApi.getInstance().getFriendList(new FriendListCallback() {
 			@Override
 			public void callback(List<Friend> friends) {
+				for (Friend friend : friends) {
+					friend.save();
+				}
 				System.out.println(friends);
 			}
 		});

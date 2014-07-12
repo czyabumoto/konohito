@@ -12,7 +12,14 @@ public class KonohitoSQLite extends SQLiteOpenHelper {
 			"create table friend ( " +
 				"_id varchar primary key," +
 				"name varchar," +
-				"tags varchar)";
+				"first_name varchar," +
+				"middle_name varchar," +
+				"last_name varchar," +
+				"birthday varchar," +
+				"first_met_date varchar," +
+				"memo varchar," +
+				"add_datetime varchar," +
+				"tags varchar)"; //10
 	static final String DROP_TABLE_FRIEND = "drop table friend;";
 
 	
@@ -22,7 +29,7 @@ public class KonohitoSQLite extends SQLiteOpenHelper {
 	
 	public void onOpen(SQLiteDatabase db) {
 		// XXX: for debug
-		//onUpgrade(db, 0, 0);
+		onUpgrade(db, 0, 0);
     }
 	
 	public void onCreate(SQLiteDatabase db) {
