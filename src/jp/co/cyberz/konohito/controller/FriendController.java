@@ -3,6 +3,8 @@ package jp.co.cyberz.konohito.controller;
 import java.util.*;
 
 import jp.co.cyberz.konohito.model.Friend;
+import jp.co.cyberz.konohito.model.api.FbApi;
+import jp.co.cyberz.konohito.model.api.FriendListCallback;
 
 public class FriendController {
 	
@@ -13,6 +15,12 @@ public class FriendController {
 		// TODO: Facebook Graph APIでフレンドリストを取得
 		
 		// TODO: DBに保存されているものからの差分を取得(newフラグとして設定する)
+		FbApi.getInstance().getFriendList(new FriendListCallback() {
+			@Override
+			public void callback(List<Friend> friends) {
+				System.out.println(friends);
+			}
+		});
 		
 		// TODO: リスナーにコールバック
 	}
