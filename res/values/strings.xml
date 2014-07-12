@@ -4,5 +4,7 @@
     <string name="app_name">konohito</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="str_title_comment">検索</string>
+	<string name="empty">Empty</string>
 
 </resources>

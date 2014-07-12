@@ -44,7 +44,7 @@ int i = 0;
 				// f.tags
 				fList.add(f);
 // XXX:for debug
-if (i++ > 2) {
+if (i++ > 4) {
 	break;
 }
 			}

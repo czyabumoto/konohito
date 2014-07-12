@@ -25,6 +25,12 @@
         </activity>
         
         <uses-library android:name="android.test.runner" />
+        
+        <!-- フレンドリスト表示 -->
+        <activity
+        	android:name="jp.co.cyberz.konohito.FriendListActivity"
+       		android:label="@string/app_name" >
+        </activity>
     </application>
     
     <instrumentation android:name="android.test.InstrumentationTestRunner"

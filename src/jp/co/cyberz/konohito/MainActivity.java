@@ -3,7 +3,11 @@ package jp.co.cyberz.konohito;
 import jp.co.cyberz.konohito.controller.FriendController;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 
 public class MainActivity extends Activity {
 
@@ -16,9 +20,19 @@ public class MainActivity extends Activity {
 		
 		// TODO: Facebook認証していなければFacebook認証画面へ
 		
-		FriendController.getFriends();
+		FriendController.getFriendsFromFacebook();
 		
 		// TODO: フレンドリストの表示へ
+		
+		Button btSend = (Button) findViewById(R.id.SendToFriendList);
+		btSend.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(MainActivity.this,
+						FriendListActivity.class);
+				startActivity(intent);
+			}
+		});
 	}
 
 	@Override

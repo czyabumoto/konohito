@@ -1,5 +1,7 @@
 package jp.co.cyberz.konohito;
 
+import java.util.*;
+
 import jp.co.cyberz.konohito.model.Friend;
 import jp.co.cyberz.util.StringUtil;
 import android.content.*;
@@ -30,22 +32,31 @@ public class KonohitoDB {
 		}
 	}
 	
+	public static List<Friend> getFriends() {
+		LinkedList<Friend> friends = new LinkedList<Friend>();
+		try {
+			Cursor cursor = db.query(TABLE_NAME_FRIENDS, COLUMNS_FRIENDS, null, null, null, null, null);
+			boolean next = cursor.moveToFirst();
+			while (next) {
+				Friend friend = new Friend();
+				setFriendFromCursor(friend, cursor);
+				friends.add(friend);
+				next = cursor.moveToNext();
+			}
+			cursor.close();
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return friends;
+	}
+	
 	public static Friend getFriend(String id) {
 		Friend friend = new Friend();
 		try {
 			Cursor cursor = db.query(TABLE_NAME_FRIENDS, COLUMNS_FRIENDS, "_id=?", new String[] {id}, null, null, null);
 			boolean next = cursor.moveToFirst();
 			while (next) {
-				friend.id             = cursor.getString(0);	
-				friend.name           = cursor.getString(1);
-				friend.first_name     = cursor.getString(2);
-				friend.middle_name    = cursor.getString(3);
-				friend.last_name      = cursor.getString(4);
-				friend.birthday       = cursor.getString(5);
-				friend.first_met_date = cursor.getString(6);
-				friend.memo           = cursor.getString(7);
-				friend.add_datetime   = cursor.getString(8);
-				friend.addTags(cursor.getString(9));
+				setFriendFromCursor(friend, cursor);
 				next = cursor.moveToNext();
 			}
 			cursor.close();
@@ -53,6 +64,19 @@ public class KonohitoDB {
 			System.out.println(e.toString());
 		}
 		return friend;
+	}
+	
+	private static void setFriendFromCursor(Friend friend, Cursor cursor) {
+		friend.id             = cursor.getString(0);	
+		friend.name           = cursor.getString(1);
+		friend.first_name     = cursor.getString(2);
+		friend.middle_name    = cursor.getString(3);
+		friend.last_name      = cursor.getString(4);
+		friend.birthday       = cursor.getString(5);
+		friend.first_met_date = cursor.getString(6);
+		friend.memo           = cursor.getString(7);
+		friend.add_datetime   = cursor.getString(8);
+		friend.addTags(cursor.getString(9));
 	}
 	
 	public static void save(Friend friend) {

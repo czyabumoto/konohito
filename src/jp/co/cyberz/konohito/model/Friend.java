@@ -22,6 +22,10 @@ public class Friend {
 	public String last_name;
 	public String birthday;
 	
+	public String link;
+	public String website;
+	public String employer_name;
+	
 	/** タグリスト */
 	public LinkedList<String> tags;
 	
