@@ -3,6 +3,8 @@ package jp.co.cyberz.konohito.model;
 import java.util.Calendar;
 import java.util.LinkedList;
 
+import jp.co.cyberz.konohito.KonohitoDB;
+
 import facebook4j.User;
 
 /**
@@ -32,12 +34,11 @@ public class Friend {
 	
 	
 	public void save() {
-		
+		KonohitoDB.save(this);
 	}
 	
 	public static Friend get(String id) {
-		
-		return new Friend();
+		return KonohitoDB.getFriend(id);
 	}
 	
 }

@@ -1,11 +1,17 @@
 package jp.co.cyberz.konohito.model.test;
 
+import android.test.AndroidTestCase;
+import jp.co.cyberz.konohito.KonohitoDB;
 import jp.co.cyberz.konohito.model.Friend;
-import junit.framework.TestCase;
 
-public class FriendTestCase extends TestCase {
+public class FriendTestCase extends AndroidTestCase {
+
+	protected void setUp() {
+		KonohitoDB.init(getContext());
+	}
 
 	public void test_saveFriend() {
+		
 		Friend friend     = new Friend();
 		friend.id         = "11111";
 		friend.name       = "山田太郎";
