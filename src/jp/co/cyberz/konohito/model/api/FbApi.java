@@ -28,7 +28,7 @@ public final class FbApi {
 		this.facebook = FacebookFactory.getSingleton();
 		this.facebook.setOAuthAppId("325326170957493", "6e913651e863728127bfed697ea80c1c");
 		facebook.setOAuthPermissions("email,publish_stream,public_profile,user_friends,user_status");
-		facebook.setOAuthAccessToken(new AccessToken("CAACEdEose0cBAKNMHIWGPDcl62zdytFqfZCdkFGHGPwq9pLJqHO4uB0JfcL3ZBxDudIrJH6jaPlPjfZBygTyRZCXOepeJeDkmZBUKd8d0Uj6brovHMOs3ZA8A4TlXiarGhmcQtobhN3lIchJkcc4xtSKvgGSQXt3n4oF3B0ZAb9ZBokMG2s6rfC6gM7atpYXaIE9y2FKZByvVCgZDZD", null));
+		facebook.setOAuthAccessToken(new AccessToken("CAACEdEose0cBAGhHs89HZACXVXlbZC2l3n56T22d1U903LxSZAj52Yir2sRukeT2FQ8JZAL3iK2wK8RjYXVNZB9BgDdjo9BBli3pgOI3eZAQAk20r2y8EZCGdHU8zGNV2gwPWqBaCooqsW3Vo4JacSXZCIXaiddOJShbRiQxL1wcaZCY9Cij5GiSZAZAh9ZCiPU36YFHgAb248SYlwZDZD", null));
 	}
 
 	/**
@@ -38,5 +38,9 @@ public final class FbApi {
 	 */
 	public void getFriendList(FriendListCallback callback) {
 		new FriendListTask(this.facebook, callback).execute();
+	}
+	
+	public void getFriend(Friend friend, List<Friend> friends, FriendCallback callback) {
+		new FriendTask(this.facebook, friend.id, friends, callback).execute();
 	}
 }

@@ -6,6 +6,7 @@ import java.util.StringTokenizer;
 
 import jp.co.cyberz.konohito.KonohitoDB;
 import jp.co.cyberz.util.CalendarUtil;
+import jp.co.cyberz.util.StringUtil;
 
 import facebook4j.User;
 
@@ -38,6 +39,9 @@ public class Friend {
 	/** Facebookフレンド追加日時 */
 	public String add_datetime;
 	
+	/** API取得日時 */
+	public String api_datetime;
+	
 	public Friend() {
 		add_datetime = CalendarUtil.todayDatetimeString();
 	}
@@ -48,6 +52,10 @@ public class Friend {
 	
 	public static Friend get(String id) {
 		return KonohitoDB.getFriend(id);
+	}
+	
+	public boolean isValid() {
+		return !StringUtil.isEmpty(id) && !StringUtil.isEmpty(name);
 	}
 	
 	/**

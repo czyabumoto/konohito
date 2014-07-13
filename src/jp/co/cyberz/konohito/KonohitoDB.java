@@ -18,12 +18,16 @@ public class KonohitoDB {
 		"name",
 		"first_name",
 		"middle_name",
-		"last_name",
+		"last_name",      // 5
 		"birthday",
 		"first_met_date",
 		"memo",
 		"add_datetime",
-		"tags"}; //10
+		"api_datetime",  // 10
+		"link",
+		"website",
+		"employer_name",
+		"tags"}; //14
 
 	public static void init(Context c) {
 		if (db == null) {
@@ -76,7 +80,11 @@ public class KonohitoDB {
 		friend.first_met_date = cursor.getString(6);
 		friend.memo           = cursor.getString(7);
 		friend.add_datetime   = cursor.getString(8);
-		friend.addTags(cursor.getString(9));
+		friend.api_datetime   = cursor.getString(9);
+		friend.link           = cursor.getString(10);
+		friend.website        = cursor.getString(11);
+		friend.employer_name  = cursor.getString(12);
+		friend.addTags(cursor.getString(13));
 	}
 	
 	public static void save(Friend friend) {
@@ -91,6 +99,10 @@ public class KonohitoDB {
 			values.put("first_met_date", StringUtil.nvl(friend.first_met_date));
 			values.put("memo",           StringUtil.nvl(friend.memo));
 			values.put("add_datetime",   StringUtil.nvl(friend.add_datetime));
+			values.put("api_datetime",   StringUtil.nvl(friend.api_datetime));
+			values.put("link",           StringUtil.nvl(friend.link));
+			values.put("website",        StringUtil.nvl(friend.website));
+			values.put("employer_name",  StringUtil.nvl(friend.employer_name));
 			values.put("tags",           friend.getTagsCsv());
 			long result = db.insert(TABLE_NAME_FRIENDS, null, values);
 			if(result < 0) {

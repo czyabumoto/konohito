@@ -19,6 +19,10 @@ public class FriendListAdapter extends BaseAdapter {
         this.context = context;
         this.items = items;
     }
+	
+	public void setItems(List<Friend> new_items) {
+		items = new_items;
+	}
 
     @Override
     public int getCount() {

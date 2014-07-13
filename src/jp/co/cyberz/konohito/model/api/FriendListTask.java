@@ -1,12 +1,12 @@
 package jp.co.cyberz.konohito.model.api;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
+import jp.co.cyberz.konohito.controller.FriendController;
 import jp.co.cyberz.konohito.model.Friend;
+import jp.co.cyberz.util.StringUtil;
 import facebook4j.Facebook;
 import facebook4j.ResponseList;
-import facebook4j.User;
 import android.os.AsyncTask;
 
 public class FriendListTask extends AsyncTask<String, Integer, List<Friend>>{
@@ -14,7 +14,7 @@ public class FriendListTask extends AsyncTask<String, Integer, List<Friend>>{
 	private Facebook facebook;
 	private FriendListCallback callback;
 	
-	public FriendListTask(Facebook facebook,FriendListCallback callback) {
+	public FriendListTask(Facebook facebook, FriendListCallback callback) {
 		super();
 		this.facebook = facebook;
 		this.callback = callback;
@@ -23,32 +23,28 @@ public class FriendListTask extends AsyncTask<String, Integer, List<Friend>>{
 	@Override
 	protected List<Friend> doInBackground(String... params) {
 		try {
-			ResponseList<facebook4j.Friend> friends = this.facebook.getFriends();
-			List<Friend> fList = new ArrayList<Friend>();
-// XXX:for debug
-int i = 0;
-			for (facebook4j.Friend friend : friends) {
-				String id = friend.getId();
-				User u = this.facebook.getUser(id);
+			ResponseList<facebook4j.Friend> fb_friends = this.facebook.getFriends();
+			List<Friend> friends = FriendController.getFriends();
+			
+			LinkedList<Friend> newList = new LinkedList<Friend>();
+			
+			for (facebook4j.Friend fb_friend : fb_friends) {
+				String id = fb_friend.getId();
 				
-				Friend f = new Friend();
-				f.id = friend.getId();
-				f.name = u.getName();
-				// f.add_date
-				f.birthday = u.getBirthday();
-				// f.first_met_date
-				f.first_name = u.getFirstName();
-				f.last_name = u.getLastName();
-				// f.memo
-				f.middle_name = u.getMiddleName();
-				// f.tags
-				fList.add(f);
-// XXX:for debug
-if (i++ > 4) {
-	break;
-}
+				// DBにないフレンドを新規に追加する
+				Friend friend = FriendController.getFriend(id);
+				if (!friend.isValid()) {
+					friend = new Friend();
+					friend.id   = id;
+					friend.name = fb_friend.getName();
+					newList.add(friend);
+				}
 			}
-			return fList;
+			
+			for (Friend friend : friends) {
+				newList.add(friend);
+			}
+			return newList;
 		} catch (Exception ex) {
 			throw new RuntimeException(ex);
 		}

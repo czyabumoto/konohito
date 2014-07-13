@@ -16,14 +16,12 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
+		// SQLite初期化
 		KonohitoDB.init(getApplicationContext());
 		
-		// TODO: Facebook認証していなければFacebook認証画面へ
+        // TODO: Facebook認証していなければFacebook認証画面へ
 		
-		FriendController.getFriendsFromFacebook();
-		
-		// TODO: フレンドリストの表示へ
-		
+		// フレンドリストの表示へ
 		Button btSend = (Button) findViewById(R.id.SendToFriendList);
 		btSend.setOnClickListener(new OnClickListener() {
 			@Override
