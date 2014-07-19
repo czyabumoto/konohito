@@ -6,5 +6,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="str_title_comment">検索</string>
 	<string name="empty">Empty</string>
+	<string name="facebook_appId">325326170957493</string>
 
 </resources>

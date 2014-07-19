@@ -27,8 +27,20 @@ public final class FbApi {
 	private FbApi() {
 		this.facebook = FacebookFactory.getSingleton();
 		this.facebook.setOAuthAppId("325326170957493", "6e913651e863728127bfed697ea80c1c");
-		facebook.setOAuthPermissions("email,publish_stream,public_profile,user_friends,user_status");
-		facebook.setOAuthAccessToken(new AccessToken("CAACEdEose0cBAGhHs89HZACXVXlbZC2l3n56T22d1U903LxSZAj52Yir2sRukeT2FQ8JZAL3iK2wK8RjYXVNZB9BgDdjo9BBli3pgOI3eZAQAk20r2y8EZCGdHU8zGNV2gwPWqBaCooqsW3Vo4JacSXZCIXaiddOJShbRiQxL1wcaZCY9Cij5GiSZAZAh9ZCiPU36YFHgAb248SYlwZDZD", null));
+		//facebook.setOAuthPermissions("email,publish_stream,public_profile,user_friends,user_status");
+		//facebook.setOAuthAccessToken(new AccessToken("CAACEdEose0cBAGhHs89HZACXVXlbZC2l3n56T22d1U903LxSZAj52Yir2sRukeT2FQ8JZAL3iK2wK8RjYXVNZB9BgDdjo9BBli3pgOI3eZAQAk20r2y8EZCGdHU8zGNV2gwPWqBaCooqsW3Vo4JacSXZCIXaiddOJShbRiQxL1wcaZCY9Cij5GiSZAZAh9ZCiPU36YFHgAb248SYlwZDZD", null));
+	}
+	
+	public void setAccessSession(String accessToken, List<String> accessPermissions) {
+		StringBuilder sb = new StringBuilder();
+		String sep = "";
+		for (String accessPermission : accessPermissions) {
+			sb.append(sep);
+			sb.append(accessPermission);
+			sep = ",";
+		}
+		this.facebook.setOAuthPermissions(sb.toString());
+		this.facebook.setOAuthAccessToken(new AccessToken(accessToken));
 	}
 
 	/**

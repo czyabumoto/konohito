@@ -7,7 +7,8 @@
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="14" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -23,18 +24,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
+
         <uses-library android:name="android.test.runner" />
-        
+
         <!-- フレンドリスト表示 -->
         <activity
-        	android:name="jp.co.cyberz.konohito.FriendListActivity"
-       		android:label="@string/app_name" >
+            android:name="jp.co.cyberz.konohito.FriendListActivity"
+            android:label="@string/app_name" >
         </activity>
+        <!-- Facebookログイン -->
+        <activity android:name="com.facebook.LoginActivity" />
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_appId" />
     </application>
-    
-    <instrumentation android:name="android.test.InstrumentationTestRunner"
-       android:targetPackage="jp.co.cyberz.konohito"
-       android:label="Tests for My App" />
+
+    <instrumentation
+        android:name="android.test.InstrumentationTestRunner"
+        android:label="Tests for My App"
+        android:targetPackage="jp.co.cyberz.konohito" />
 
 </manifest>
