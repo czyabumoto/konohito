@@ -16,6 +16,7 @@ public final class FbApi {
 	private static FbApi api;
 
 	private Facebook facebook;
+	private String accessId;
 
 	public static FbApi getInstance() {
 		if (FbApi.api == null) {

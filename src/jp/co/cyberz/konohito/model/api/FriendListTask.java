@@ -6,6 +6,8 @@ import jp.co.cyberz.konohito.controller.FriendController;
 import jp.co.cyberz.konohito.model.Friend;
 import jp.co.cyberz.util.StringUtil;
 import facebook4j.Facebook;
+import facebook4j.Friendlist;
+import facebook4j.Post;
 import facebook4j.ResponseList;
 import android.os.AsyncTask;
 
@@ -24,6 +26,12 @@ public class FriendListTask extends AsyncTask<String, Integer, List<Friend>>{
 	protected List<Friend> doInBackground(String... params) {
 		try {
 			ResponseList<facebook4j.Friend> fb_friends = this.facebook.getFriends();
+//			ResponseList<Post> fb_feed = this.facebook.getFeed();
+//			ResponseList<Friendlist> fb_friendLists = this.facebook.getFriendlists();
+//			for (Friendlist friendlist : fb_friendLists) {
+//				ResponseList<facebook4j.Friend> fb_fs = this.facebook.getFriendlistMembers(friendlist.getId());
+//				System.out.println(fb_fs);
+//			}
 			List<Friend> friends = FriendController.getFriends();
 			
 			LinkedList<Friend> newList = new LinkedList<Friend>();

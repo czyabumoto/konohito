@@ -1,17 +1,23 @@
 package jp.co.cyberz.konohito;
 
+import com.facebook.HttpMethod;
+import com.facebook.Request;
+import com.facebook.Response;
 import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
+import com.facebook.widget.LoginButton;
 
 import jp.co.cyberz.konohito.controller.FriendController;
 import jp.co.cyberz.konohito.model.api.FbApi;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
 
 public class MainActivity extends Activity {
@@ -29,6 +35,8 @@ public class MainActivity extends Activity {
         // TODO: Facebook認証していなければFacebook認証画面へ
 		uiHelper = new UiLifecycleHelper(this, callback);
 		uiHelper.onCreate(savedInstanceState);
+		LoginButton authButton = (LoginButton) findViewById(R.id.authButton);
+		authButton.setReadPermissions("public_profile", "basic_info", "user_friends");
 		
 		// フレンドリストの表示へ
 		Button btSend = (Button) findViewById(R.id.SendToFriendList);
@@ -64,6 +72,7 @@ public class MainActivity extends Activity {
 	private void onSessionStateChange(Session session, SessionState state, Exception exception) {
         if (state.isOpened()) {
         	FbApi.getInstance().setAccessSession(session.getAccessToken(), session.getPermissions());
+        	//TODO:友達更新
         } else if (state.isClosed()) {
         	System.out.println("Loged out.");
         }
